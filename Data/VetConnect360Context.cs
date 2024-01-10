@@ -17,5 +17,11 @@ namespace VetConnect360.Data
         public DbSet<VetConnect360.Models.Pet> Pet { get; set; } = default!;
 
         public DbSet<VetConnect360.Models.Owner>? Owner { get; set; }
+
+        public DbSet<VetConnect360.Models.Service>? Service { get; set; }
+
+        public DbSet<VetConnect360.Models.Doctor>? Doctor { get; set; }
+
+        public DbSet<VetConnect360.Models.Appointment>? Appointment { get; set; }
     }
 }

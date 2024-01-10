@@ -18,5 +18,8 @@ namespace VetConnect360.Models
         public int? OwnerID { get; set; }
         public Owner? Owner { get; set; }
 
+
+        public ICollection<Appointment>? Appointments { get; set; }
+
     }
 }

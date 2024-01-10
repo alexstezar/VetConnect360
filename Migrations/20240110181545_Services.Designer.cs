@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetConnect360.Data;
 
@@ -11,9 +12,10 @@ using VetConnect360.Data;
 namespace VetConnect360.Migrations
 {
     [DbContext(typeof(VetConnect360Context))]
-    partial class VetConnect360ContextModelSnapshot : ModelSnapshot
+    [Migration("20240110181545_Services")]
+    partial class Services
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,69 +23,6 @@ namespace VetConnect360.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("VetConnect360.Models.Appointment", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DoctorID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PetID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ServiceID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DoctorID");
-
-                    b.HasIndex("PetID");
-
-                    b.HasIndex("ServiceID");
-
-                    b.ToTable("Appointment");
-                });
-
-            modelBuilder.Entity("VetConnect360.Models.Doctor", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Experience")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Doctor");
-                });
 
             modelBuilder.Entity("VetConnect360.Models.Owner", b =>
                 {
@@ -175,27 +114,6 @@ namespace VetConnect360.Migrations
                     b.ToTable("Service");
                 });
 
-            modelBuilder.Entity("VetConnect360.Models.Appointment", b =>
-                {
-                    b.HasOne("VetConnect360.Models.Doctor", "Doctor")
-                        .WithMany("Appointments")
-                        .HasForeignKey("DoctorID");
-
-                    b.HasOne("VetConnect360.Models.Pet", "Pet")
-                        .WithMany("Appointments")
-                        .HasForeignKey("PetID");
-
-                    b.HasOne("VetConnect360.Models.Service", "Service")
-                        .WithMany("Appointments")
-                        .HasForeignKey("ServiceID");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Pet");
-
-                    b.Navigation("Service");
-                });
-
             modelBuilder.Entity("VetConnect360.Models.Pet", b =>
                 {
                     b.HasOne("VetConnect360.Models.Owner", "Owner")
@@ -205,24 +123,9 @@ namespace VetConnect360.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("VetConnect360.Models.Doctor", b =>
-                {
-                    b.Navigation("Appointments");
-                });
-
             modelBuilder.Entity("VetConnect360.Models.Owner", b =>
                 {
                     b.Navigation("Pets");
-                });
-
-            modelBuilder.Entity("VetConnect360.Models.Pet", b =>
-                {
-                    b.Navigation("Appointments");
-                });
-
-            modelBuilder.Entity("VetConnect360.Models.Service", b =>
-                {
-                    b.Navigation("Appointments");
                 });
 #pragma warning restore 612, 618
         }

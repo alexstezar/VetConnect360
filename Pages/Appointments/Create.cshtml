@@ -1,0 +1,52 @@
+﻿@page
+@model VetConnect360.Pages.Appointments.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Appointment.PetID" class="control-label">Pet Name</label>
+                <select asp-for="Appointment.PetID" class="form-control" asp-items="ViewBag.PetID">
+                </select>
+                <span asp-validation-for="Appointment.PetID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Appointment.Date" class="control-label"></label>
+                <input asp-for="Appointment.Date" class="form-control" />
+                <span asp-validation-for="Appointment.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Appointment.DoctorID" class="control-label">Doctor Name</label>
+                <select asp-for="Appointment.DoctorID" class="form-control" asp-items="ViewBag.DoctorID">
+                </select>
+                <span asp-validation-for="Appointment.DoctorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Appointment.ServiceID" class="control-label">Medical Procedure Name</label>
+                <select asp-for="Appointment.ServiceID" class="form-control" asp-items="ViewBag.ServiceID">
+                </select>
+                <span asp-validation-for="Appointment.ServiceID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
